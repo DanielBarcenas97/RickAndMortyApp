@@ -1,6 +1,7 @@
 package com.example.rickmortyapp.views.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +20,16 @@ public class CharactersListAdapter extends PagedListAdapter<Character, Character
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView characterImageView;
         TextView nameTextView;
+        TextView statusText;
+        ImageView status;
 
         private ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             characterImageView = itemView.findViewById(R.id.characterImageView);
             nameTextView = itemView.findViewById(R.id.locationNameTextView);
+            statusText = itemView.findViewById(R.id.status_text);
+            status = itemView.findViewById(R.id.status);
         }
     }
 
@@ -76,9 +81,18 @@ public class CharactersListAdapter extends PagedListAdapter<Character, Character
 
         String name = character.getName();
         String imageURL = character.getImage();
+        String status = character.getStatus();
 
         holder.nameTextView.setText(name);
         holder.itemView.setOnClickListener(v -> itemClickListener.onClick(position, v));
+
+        if(status.equals("Alive")){
+            holder.status.setImageResource(R.drawable.status);
+            holder.statusText.setText("Vivo");
+        }else{
+            holder.status.setImageResource(R.drawable.statusdead);
+            holder.statusText.setText("Muerto");
+        }
 
         Glide.with(context)
                 .load(imageURL)
