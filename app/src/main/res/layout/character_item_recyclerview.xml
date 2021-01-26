@@ -43,7 +43,7 @@
                     android:layout_gravity="center"
                     android:maxLines="2"
                     android:text="Name"
-                    android:textSize="28sp"
+                    android:textSize="32sp"
                     android:textAppearance="@style/recyclerItemsNameTextStyle" />
 
                 <LinearLayout
@@ -67,7 +67,7 @@
                         android:layout_gravity="center"
                         android:maxLines="2"
                         android:text="Name"
-                        android:textSize="20sp"
+                        android:textSize="25sp"
                         android:textAppearance="@style/recyclerItemsNameTextStyle" />
 
                 </LinearLayout>
