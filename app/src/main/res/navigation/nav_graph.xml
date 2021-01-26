@@ -10,7 +10,7 @@
         tools:layout="@layout/fragment_characters"
         android:id="@+id/charactersFragment"
         android:name="com.example.rickmortyapp.views.CharactersFragment"
-        android:label="Personajes" >
+        android:label="Lista de Personajes" >
         <action
             android:id="@+id/action_charactersListFragment_to_characterDetailsFragment"
             app:destination="@id/characterDetailsFragment" />
@@ -18,5 +18,5 @@
     <fragment
         android:id="@+id/characterDetailsFragment"
         android:name="com.example.rickmortyapp.views.CharacterDetailsFragment"
-        android:label="CharacterDetailsFragment" />
+        android:label="Descripción" />
 </navigation>

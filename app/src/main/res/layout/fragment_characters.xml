@@ -11,7 +11,6 @@
         android:id="@+id/displayingResultsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:background="@color/secondaryDarkColor"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,19 +24,20 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:gravity="center"
+            android:textStyle="bold"
             android:layout_weight="3"
-            android:text="Displaying results for: query"
+            android:text="Los resultados encontrados para : query son"
             android:textColor="@color/primaryColor"
             android:maxLines="1"
             android:ellipsize="end"/>
 
         <ImageView
             android:id="@+id/resetSearchButton"
-            android:layout_width="40dp"
+            android:layout_width="55dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="5dp"
             android:background="@color/primaryColor"
             android:src="@drawable/ic_close_white_48dp" />
     </LinearLayout>
@@ -46,8 +46,8 @@
         android:id="@+id/charactersRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:numColumns="auto_fit"
         android:scrollbars="vertical"
         android:translationZ="1dp"

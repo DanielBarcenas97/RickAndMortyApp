@@ -8,8 +8,7 @@
     <string name="notFoundErrorCode">404</string>
     <string name="notFoundErrorText">Aw man! No results found.</string>
     <string name="searchMenuTitle">Search</string>
-    <string name="episodeItem">%1s - %2s</string>
-    <string name="queryIndicator">Displaying results for: %1s</string>
+    <string name="queryIndicator">Los resultados encontrados para %1s son: </string>
     <string name="episodeBundleKey">episode</string>
     <string name="characterBundleKey">character</string>
     <string name="locationBundleKey">location</string>

@@ -88,13 +88,17 @@ public class CharactersDataSource extends PageKeyedDataSource<Integer, Character
                     public void onResponse(@NonNull Call<CharacterPageResponse> call, @NonNull Response<CharacterPageResponse> response) {
                         if(response.body() != null) {
                             String nextURL = response.body().getInfo().getNext();
-                            Integer nextPage = null;
-                            if(!nextURL.isEmpty()) {
-                                // subtracting '0' converts from ascii code to actual digit
-                                nextPage = nextURL.charAt(nextURL.length() - 1) - '0';
+
+                            if(nextURL != null){
+                                Integer nextPage = null;
+                                if(!nextURL.isEmpty()) {
+                                    // subtracting '0' converts from ascii code to actual digit
+                                    nextPage = nextURL.charAt(nextURL.length() - 1) - '0';
+                                }
+
+                                callback.onResult(response.body().getResults(), nextPage);
                             }
 
-                            callback.onResult(response.body().getResults(), nextPage);
                         }
                     }
 
