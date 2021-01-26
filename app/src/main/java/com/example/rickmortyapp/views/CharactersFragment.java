@@ -23,11 +23,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.rickmortyapp.R;
+import com.example.rickmortyapp.data.models.characters.Character;
+import com.example.rickmortyapp.data.remote.characters.CharactersDataSource;
+import com.example.rickmortyapp.utils.GIFUtils;
+import com.example.rickmortyapp.viewmodels.CharactersViewModel;
+import com.example.rickmortyapp.views.adapters.CharactersListAdapter;
 
 public class CharactersFragment extends Fragment {
 
-    //private CharactersViewModel viewModel;
-    //private CharactersListAdapter adapter;
+    private CharactersViewModel viewModel;
+    private CharactersListAdapter adapter;
 
     private LinearLayout displayingResultsLayout;
     private TextView displayingResultsTextView;
@@ -57,7 +62,7 @@ public class CharactersFragment extends Fragment {
         inflater.inflate(R.menu.options_menu, menu);
 
         searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setQueryHint("Search characters...");
+        searchView.setQueryHint(getString(R.string.search_characters));
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -96,38 +101,39 @@ public class CharactersFragment extends Fragment {
 
         displayingResultsLayout.setVisibility(View.GONE);
         resetSearchButton.setOnClickListener(v ->
-            searchCharacter(null)
+                searchCharacter(null)
         );
 
-        //// initialize recyclerview
-        //adapter = new CharactersListAdapter(getContext());
-        //adapter.setOnItemClickListener(characterItemClickListener);
-        //recyclerView.setAdapter(adapter);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        // initialize recyclerview
+        adapter = new CharactersListAdapter(getContext());
+        adapter.setOnItemClickListener(characterItemClickListener);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        //// Create ViewModel and set up LiveData Observers
-        //viewModel = ViewModelProviders.of(this).get(CharactersViewModel.class);
-        //viewModel.getCharactersList().observe(this, pagedList ->
-        //        adapter.submitList(pagedList)
-        //);
+        // Create ViewModel and set up LiveData Observers
+        viewModel = ViewModelProviders.of(this).get(CharactersViewModel.class);
+        viewModel.getCharactersList().observe(getViewLifecycleOwner(), pagedList ->
+                adapter.submitList(pagedList)
+        );
 
-        //viewModel.getCharactersDataSourceLiveData().observe(this, charactersDataSource ->
-        //        charactersDataSource.getInitialLoadLiveData().observe(this, throwable -> {
-        //            // If initial Data loaded successfully
-        //            if(throwable == null) {
-        //                onLoadSuccess();
-        //            } else {
-        //                onLoadFailure(charactersDataSource, throwable.getMessage());
-        //            }
-        //        })
-        //);
+        viewModel.getCharactersDataSourceLiveData().observe(getViewLifecycleOwner(), charactersDataSource ->
+                charactersDataSource.getInitialLoadLiveData().observe(getViewLifecycleOwner(), throwable -> {
+                    // If initial Data loaded successfully
+                    if(throwable == null) {
+                        onLoadSuccess();
+                    } else {
+                        onLoadFailure(charactersDataSource, throwable.getMessage());
+                    }
+                })
+        );
 
-        //String currentQuery = viewModel.getCurrentQueryName();
-        //if(currentQuery != null && !currentQuery.isEmpty()) {
-        //    displayingResultsLayout.setVisibility(View.VISIBLE);
-        //    String queryIndicatorText = getString(R.string.queryIndicator, currentQuery);
-        //    displayingResultsTextView.setText(queryIndicatorText);        }
-        //onLoading();
+        String currentQuery = viewModel.getCurrentQueryName();
+        if(currentQuery != null && !currentQuery.isEmpty()) {
+            displayingResultsLayout.setVisibility(View.VISIBLE);
+            String queryIndicatorText = getString(R.string.queryIndicator, currentQuery);
+            displayingResultsTextView.setText(queryIndicatorText);        }
+
+        onLoading();
     }
 
     private void searchCharacter(String name) {
@@ -139,7 +145,7 @@ public class CharactersFragment extends Fragment {
             displayingResultsTextView.setText(queryIndicatorText);
         }
 
-        //viewModel.searchCharacter(name);
+        viewModel.searchCharacter(name);
         onLoading();
     }
 
@@ -149,10 +155,9 @@ public class CharactersFragment extends Fragment {
         retryButton.setVisibility(View.GONE);
         errorTextView.setVisibility(View.GONE);
 
-        //Glide.with(this).asGif().load(GIFUtils.getRandomLoadingGIF()).into(gifLoadingView);
+        Glide.with(this).asGif().load(GIFUtils.getRandomLoadingGIF()).into(gifLoadingView);
     }
 
-    /*
     private void onLoadSuccess() {
         loadingLayout.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
@@ -188,12 +193,6 @@ public class CharactersFragment extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putSerializable(getString(R.string.characterBundleKey), character);
 
-        navController.navigate(
-                R.id.action_charactersListFragment_to_characterDetailsFragment,
-                bundle
-        );
+        //navController.navigate(R.id.action_charactersListFragment_to_characterDetailsFragment, bundle);
     };
-
-
-     */
 }

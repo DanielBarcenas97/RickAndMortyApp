@@ -13,5 +13,6 @@
     <string name="episodeBundleKey">episode</string>
     <string name="characterBundleKey">character</string>
     <string name="locationBundleKey">location</string>
+    <string name="search_characters">Buscar Personajes...</string>
 
 </resources>
