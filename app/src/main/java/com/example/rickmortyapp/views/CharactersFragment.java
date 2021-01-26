@@ -29,6 +29,8 @@ import com.example.rickmortyapp.utils.GIFUtils;
 import com.example.rickmortyapp.viewmodels.CharactersViewModel;
 import com.example.rickmortyapp.views.adapters.CharactersListAdapter;
 
+import java.util.Objects;
+
 public class CharactersFragment extends Fragment {
 
     private CharactersViewModel viewModel;
@@ -122,7 +124,7 @@ public class CharactersFragment extends Fragment {
                     if(throwable == null) {
                         onLoadSuccess();
                     } else {
-                        onLoadFailure(charactersDataSource, throwable.getMessage());
+                        onLoadFailure(charactersDataSource, Objects.requireNonNull(throwable.getMessage()));
                     }
                 })
         );
@@ -193,6 +195,6 @@ public class CharactersFragment extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putSerializable(getString(R.string.characterBundleKey), character);
 
-        //navController.navigate(R.id.action_charactersListFragment_to_characterDetailsFragment, bundle);
+        navController.navigate(R.id.action_charactersListFragment_to_characterDetailsFragment, bundle);
     };
 }
