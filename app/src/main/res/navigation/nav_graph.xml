@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/charactersFragment">
+
 
     <fragment
-        tools:layout="@layout/fragment_main"
-        android:id="@+id/mainFragment"
-        android:name="com.example.rickmortyapp.MainFragment"
+        tools:layout="@layout/fragment_characters"
+        android:id="@+id/charactersFragment"
+        android:name="com.example.rickmortyapp.views.CharactersFragment"
         android:label="Personajes" />
 </navigation>
